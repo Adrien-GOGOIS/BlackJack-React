@@ -3,10 +3,10 @@ import "./App.css";
 
 // IMAGES
 
-// import back from "../public/images/back.png";
-import logo from "../public/images/Logo.png";
-import lose from "../public/images/lose.png";
-import win from "../public/images/win.png";
+import back from "./assets/images/back.png";
+import logo from "./assets/images/Logo.png";
+import lose from "./assets/images/lose.png";
+import win from "./assets/images/win.png";
 
 // COMPONENTS
 import Button from "./components/Button.js";
