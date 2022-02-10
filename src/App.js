@@ -3,10 +3,10 @@ import "./App.css";
 
 // IMAGES
 
-import back from "./assets/images/back.png";
-import logo from "./assets/images/Logo.png";
-import lose from "./assets/images/lose.png";
-import win from "./assets/images/win.png";
+// import back from "./assets/images/back.png";
+// import logo from "./assets/images/Logo.png";
+// import lose from "./assets/images/lose.png";
+// import win from "./assets/images/win.png";
 
 // COMPONENTS
 import Button from "./components/Button.js";
@@ -355,9 +355,19 @@ class App extends React.Component {
   // RENDER
   render() {
     if (this.state.messageResult === "WINNER") {
-      return <Result resultGame={win} reset={this.reset} />;
+      return (
+        <Result
+          resultGame={require("./assets/images/win.jpg")}
+          reset={this.reset}
+        />
+      );
     } else if (this.state.messageResult === "LOOSER") {
-      return <Result resultGame={lose} reset={this.reset} />;
+      return (
+        <Result
+          resultGame={require("./assets/images/lose.jpg")}
+          reset={this.reset}
+        />
+      );
     } else if (this.state.messageResult === "") {
       return (
         <div className="app-container">
