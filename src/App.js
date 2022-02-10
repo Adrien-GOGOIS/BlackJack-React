@@ -369,7 +369,7 @@ class App extends React.Component {
             {/* High Page */}
 
             <div className="title-container">
-              <img className="logo" src={logo} />
+              <img className="logo" src={require("./assets/images/Logo.png")} />
 
               <h1>BlackJack</h1>
             </div>
