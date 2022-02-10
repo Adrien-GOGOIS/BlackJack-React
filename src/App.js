@@ -362,7 +362,10 @@ class App extends React.Component {
             {/* High Page */}
 
             <div className="title-container">
-              <img className="logo" src="/images/Logo.png" />
+              <img
+                className="logo"
+                src="https://adrien-gogois.github.io/BlackJack-React/public/images/Logo.png"
+              />
 
               <h1>BlackJack</h1>
             </div>
