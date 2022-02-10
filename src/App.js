@@ -1,6 +1,13 @@
 import React from "react";
 import "./App.css";
 
+// IMAGES
+
+import back from "../public/images/back.png";
+import logo from "../public/images/Logo.png";
+import lose from "../public/images/lose.png";
+import win from "../public/images/win.png";
+
 // COMPONENTS
 import Button from "./components/Button.js";
 import Cards from "./components/Cards";
@@ -348,9 +355,9 @@ class App extends React.Component {
   // RENDER
   render() {
     if (this.state.messageResult === "WINNER") {
-      return <Result resultGame="/images/win.jpg" reset={this.reset} />;
+      return <Result resultGame={win} reset={this.reset} />;
     } else if (this.state.messageResult === "LOOSER") {
-      return <Result resultGame="/images/lose.jpg" reset={this.reset} />;
+      return <Result resultGame={lose} reset={this.reset} />;
     } else if (this.state.messageResult === "") {
       return (
         <div className="app-container">
@@ -362,10 +369,7 @@ class App extends React.Component {
             {/* High Page */}
 
             <div className="title-container">
-              <img
-                className="logo"
-                src="https://adrien-gogois.github.io/BlackJack-React/public/images/Logo.png"
-              />
+              <img className="logo" src={logo} />
 
               <h1>BlackJack</h1>
             </div>
