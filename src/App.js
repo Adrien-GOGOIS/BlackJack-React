@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 
+// COMPONENTS
 import Button from "./components/Button.js";
 import Cards from "./components/Cards";
 import Players from "./components/Player";
@@ -9,9 +10,13 @@ import Score from "./components/Score";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
+// VARIABLES DE STOCKAGE DU DECK
 let cardsDeck = [];
+
+// PANSEMENT pour le stockage du score de la banque (A REGLER):
 let tempScore = 0;
 
+// CLASSE PRINCIPALE
 class App extends React.Component {
   constructor() {
     super();
@@ -35,7 +40,7 @@ class App extends React.Component {
     this.autoBankDraw = this.autoBankDraw.bind(this);
   }
 
-  //appel de l'API "DeckOfCardsApi" et tirage initial des cartes de la banque avec score
+  // DEMARRAGE DU JEU --> APPEL DE L'API / TIRAGE CARTES / REGLES SPECIALES et AJOUT DU SCORE INITIAL
 
   reset() {
     console.log("test cardsDeck", cardsDeck);
@@ -114,6 +119,7 @@ class App extends React.Component {
           });
         }
 
+        // BOUCLE TIRAGE INITIAL CARTES BANQUES
         for (let i = 0; i < 2; i++) {
           // Score spécifiques pour les "têtes" (+10 ou +1 pour l'AS)
           if (
@@ -299,16 +305,18 @@ class App extends React.Component {
     }
   }
 
+  // FONCTION DE FIN DE PARTIE
   endGame() {
     console.log("endGame");
-    // APPEL FONCTION DE TIRAGE AUTOMATIQUE D'UNE CARTE SI LA BANQUE EST EN DESSOUS DE 17 AU MOMENT DE TERMINER LE JEU
 
+    // APPEL FONCTION DE TIRAGE AUTOMATIQUE D'UNE CARTE SI LA BANQUE EST EN DESSOUS DE 17 AU MOMENT DE TERMINER LE JEU
     console.log("TEMPSCORE", tempScore);
     if (this.state.scorePlayer !== 0 && this.state.scoreBank !== 0) {
       if (tempScore < 17) {
         this.autoBankDraw();
       }
 
+      // WIN ou LOOSE : Comparaison des scores
       if (
         (this.state.scorePlayer <= 21 && this.state.scorePlayer > tempScore) ||
         tempScore > 21
@@ -332,6 +340,7 @@ class App extends React.Component {
         );
       }
     } else {
+      // GUARD : Evite de finir le jeu avant d'avoir commencé
       alert("Lance d'abord le jeu");
     }
   }
@@ -339,9 +348,13 @@ class App extends React.Component {
   // RENDER
   render() {
     if (this.state.messageResult === "WINNER") {
-      return <Result resultGame="/images/win.jpg" reset={this.reset} />;
+      return (
+        <Result resultGame="../public/images/win.jpg" reset={this.reset} />
+      );
     } else if (this.state.messageResult === "LOOSER") {
-      return <Result resultGame="/images/lose.jpg" reset={this.reset} />;
+      return (
+        <Result resultGame="../public/images/lose.jpg" reset={this.reset} />
+      );
     } else if (this.state.messageResult === "") {
       return (
         <div className="app-container">
@@ -353,7 +366,7 @@ class App extends React.Component {
             {/* High Page */}
 
             <div className="title-container">
-              <img className="logo" src="/images/Logo.png" />
+              <img className="logo" src="../public/images/Logo.png" />
 
               <h1>BlackJack</h1>
             </div>
@@ -362,7 +375,7 @@ class App extends React.Component {
 
             <div>
               <Players
-                playerImg="/images/Croupier2.png"
+                playerImg="../public/images/Croupier2.png"
                 altPlayer="Le croupier contre qui vous jouez"
               />
             </div>
