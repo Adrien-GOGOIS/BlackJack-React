@@ -388,8 +388,8 @@ class App extends React.Component {
 
             <div className="main-container">
               <div className="title-score-div">
-                <h3 className="title-score">Score Total</h3>
-                <h3 className="title-score">Score des cartes</h3>
+                <h3 className="title-score-">Score Total</h3>
+                <h3 className="title-score-">Score cartes</h3>
               </div>
               <div className="game-container">
                 <div className="player-container croupier-container">
