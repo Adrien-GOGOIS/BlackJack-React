@@ -3,7 +3,7 @@ import "./App.css";
 
 // IMAGES
 
-import back from "../public/images/back.png";
+// import back from "../public/images/back.png";
 import logo from "../public/images/Logo.png";
 import lose from "../public/images/lose.png";
 import win from "../public/images/win.png";
