@@ -369,13 +369,6 @@ class App extends React.Component {
 
             {/* Croupier Part */}
 
-            <div>
-              <Players
-                playerImg="/images/Croupier2.png"
-                altPlayer="Le croupier contre qui vous jouez"
-              />
-            </div>
-
             <div className="main-container">
               <div className="title-score-div">
                 <h3 className="title-score">Score Total</h3>
