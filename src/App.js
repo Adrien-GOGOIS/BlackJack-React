@@ -39,7 +39,7 @@ class App extends React.Component {
       totalScoreBank: 0,
       totalScorePlayer: 0,
       messageResult: "",
-      displayBack: "none"
+      displayBack: "none",
     };
 
     // Bind fonction onCLick tirage des cartes du joueur
@@ -61,7 +61,7 @@ class App extends React.Component {
       scoreBank: 0,
       scorePlayer: 0,
       messageResult: "",
-      displayBack: "none"
+      displayBack: "none",
     });
 
     tempScore = 0;
@@ -75,10 +75,7 @@ class App extends React.Component {
 
         // Récupération de l'image de la carte tirée par la banque
         this.setState({
-          bankCards: [
-            cardsDeck[0].cards[0].image,
-            ...this.state.bankCards,
-          ],
+          bankCards: [cardsDeck[0].cards[0].image, ...this.state.bankCards],
 
           displayBack: "flex",
 
@@ -156,12 +153,14 @@ class App extends React.Component {
 
           //RÈGLE DE L'AS QUI VAUT 11 QUAND LE SCORE DES CARTES EST INFERIEUR A 11
 
-          if (cardsDeck[0].cards[i].value === "ACE" && this.state.scoreBank < 11) {
+          if (
+            cardsDeck[0].cards[i].value === "ACE" &&
+            this.state.scoreBank < 11
+          ) {
             this.setState({
               scoreBank: 10 + this.state.scoreBank,
-              cardCount: this.state.cardCount + 1
-            })
-
+              cardCount: this.state.cardCount + 1,
+            });
           }
         }
 
@@ -190,16 +189,17 @@ class App extends React.Component {
 
           //RÈGLE DE L'AS QUI VAUT 11 QUAND LE SCORE DES CARTES EST INFERIEUR A 11
 
-          if (cardsDeck[0].cards[i].value === "ACE" && this.state.scorePlayer < 11) {
+          if (
+            cardsDeck[0].cards[i].value === "ACE" &&
+            this.state.scorePlayer < 11
+          ) {
             this.setState({
               scorePlayer: 10 + this.state.scorePlayer,
-              cardCount: this.state.cardCount + 1
-            })
-
+              cardCount: this.state.cardCount + 1,
+            });
           }
         }
       });
-
   }
 
   //
@@ -291,12 +291,14 @@ class App extends React.Component {
 
     //RÈGLE DE L'AS QUI VAUT 11 QUAND LE SCORE DES CARTES EST INFERIEUR A 11
 
-    if (cardsDeck[0].cards[this.state.cardCount].value === "ACE" && this.state.scorePlayer < 11) {
+    if (
+      cardsDeck[0].cards[this.state.cardCount].value === "ACE" &&
+      this.state.scorePlayer < 11
+    ) {
       this.setState({
         scorePlayer: 10 + this.state.scorePlayer,
-        cardCount: this.state.cardCount + 1
-      })
-
+        cardCount: this.state.cardCount + 1,
+      });
     }
   }
 
@@ -343,6 +345,8 @@ class App extends React.Component {
         cardCount: this.state.cardCount + 1,
       });
     }
+
+    this.endGame();
   }
 
   // FONCTION DE FIN DE PARTIE
@@ -353,7 +357,7 @@ class App extends React.Component {
     console.log("TEMPSCORE", tempScore);
     if (this.state.scorePlayer !== 0 && this.state.scoreBank !== 0) {
       if (tempScore < 17) {
-        this.autoBankDraw();
+        return this.autoBankDraw();
       }
 
       // WIN ou LOOSE : Comparaison des scores
@@ -433,9 +437,11 @@ class App extends React.Component {
                       children="Dealer"
                       nameScore="score-div-left"
                     />
-                    <Cards cards={this.state.bankCards}
+                    <Cards
+                      cards={this.state.bankCards}
                       hiddenCard={require("./assets/images/back.png")}
-                      styleCard={this.state.displayBack} />
+                      styleCard={this.state.displayBack}
+                    />
                     <Score
                       score={this.state.scoreBank}
                       scoreType="current-score"
@@ -455,8 +461,7 @@ class App extends React.Component {
                       children="Joueur"
                       nameScore="score-div-left"
                     />
-                    <Cards cards={this.state.playerCard}
-                      styleCard="none" />
+                    <Cards cards={this.state.playerCard} styleCard="none" />
                     <Score
                       score={this.state.scorePlayer}
                       scoreType="current-score"
