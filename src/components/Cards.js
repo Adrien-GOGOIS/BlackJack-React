@@ -11,15 +11,22 @@ class Cards extends React.Component {
 
           <ul className="cards-ul">
 
+            <li>
+              <img className="cards back-card" alt="back card" style={{ display: this.props.styleCard }} src={this.props.hiddenCard} />
+            </li>
+
             {this.props.cards.map((item, index) => {
+
               return (
 
                 <li key={index}>
-                  <img className="cards" src={item} />
+                  <img className="cards" alt={this.props.altCard} src={item} />
                 </li>
 
               );
+              
             })}
+
           </ul>
 
         </div>
@@ -28,6 +35,7 @@ class Cards extends React.Component {
 
     );
   }
+
 }
 
 export default Cards;

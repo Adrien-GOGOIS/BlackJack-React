@@ -39,6 +39,7 @@ class App extends React.Component {
       totalScoreBank: 0,
       totalScorePlayer: 0,
       messageResult: "",
+      displayBack: "none"
     };
 
     // Bind fonction onCLick tirage des cartes du joueur
@@ -60,6 +61,7 @@ class App extends React.Component {
       scoreBank: 0,
       scorePlayer: 0,
       messageResult: "",
+      displayBack: "none"
     });
 
     tempScore = 0;
@@ -75,33 +77,33 @@ class App extends React.Component {
         this.setState({
           bankCards: [
             cardsDeck[0].cards[0].image,
-            cardsDeck[0].cards[1].image,
             ...this.state.bankCards,
           ],
+
+          displayBack: "flex",
 
           // Ajout des valeurs cartes banque pour règle spéciale des 21
           bankCardValue: [
             cardsDeck[0].cards[0].value,
-            cardsDeck[0].cards[1].value,
             ...this.state.bankCardValue,
           ],
 
           //rajout des deux cartes du joueur a l'initialisation de la partie (nico)
 
           playerCard: [
+            cardsDeck[0].cards[1].image,
             cardsDeck[0].cards[2].image,
-            cardsDeck[0].cards[3].image,
             ...this.state.playerCard,
           ],
 
           // Ajout des valeurs cartes joueur pour règle spéciale des 21
           playerCardValue: [
+            cardsDeck[0].cards[1].value,
             cardsDeck[0].cards[2].value,
-            cardsDeck[0].cards[3].value,
             ...this.state.playerCardValue,
           ],
 
-          cardCount: this.state.cardCount + 4,
+          cardCount: this.state.cardCount + 3,
         });
 
         // REGLE SPECIALE DU SCORE 21 TETE + AS POUR LE PLAYER
@@ -127,7 +129,7 @@ class App extends React.Component {
         }
 
         // BOUCLE TIRAGE INITIAL CARTES BANQUES
-        for (let i = 0; i < 2; i++) {
+        for (let i = 0; i < 1; i++) {
           // Score spécifiques pour les "têtes" (+10 ou +1 pour l'AS)
           if (
             cardsDeck[0].cards[i].value === "QUEEN" ||
@@ -151,11 +153,21 @@ class App extends React.Component {
                 parseInt(cardsDeck[0].cards[i].value) + this.state.scoreBank,
             });
           }
+
+          //RÈGLE DE L'AS QUI VAUT 11 QUAND LE SCORE DES CARTES EST INFERIEUR A 11
+
+          if (cardsDeck[0].cards[i].value === "ACE" && this.state.scoreBank < 11) {
+            this.setState({
+              scoreBank: 10 + this.state.scoreBank,
+              cardCount: this.state.cardCount + 1
+            })
+
+          }
         }
 
         //répétition de la boucle précédente adaptée cette fois-ci pour les cartes du joueur
 
-        for (let i = 2; i < 4; i++) {
+        for (let i = 1; i < 3; i++) {
           if (
             cardsDeck[0].cards[i].value === "QUEEN" ||
             cardsDeck[0].cards[i].value === "KING" ||
@@ -175,8 +187,19 @@ class App extends React.Component {
                 parseInt(cardsDeck[0].cards[i].value) + this.state.scorePlayer,
             });
           }
+
+          //RÈGLE DE L'AS QUI VAUT 11 QUAND LE SCORE DES CARTES EST INFERIEUR A 11
+
+          if (cardsDeck[0].cards[i].value === "ACE" && this.state.scorePlayer < 11) {
+            this.setState({
+              scorePlayer: 10 + this.state.scorePlayer,
+              cardCount: this.state.cardCount + 1
+            })
+
+          }
         }
       });
+
   }
 
   //
@@ -264,6 +287,16 @@ class App extends React.Component {
         cardCount: this.state.cardCount + 1,
       });
       console.log("TEMPSCORE", tempScore);
+    }
+
+    //RÈGLE DE L'AS QUI VAUT 11 QUAND LE SCORE DES CARTES EST INFERIEUR A 11
+
+    if (cardsDeck[0].cards[this.state.cardCount].value === "ACE" && this.state.scorePlayer < 11) {
+      this.setState({
+        scorePlayer: 10 + this.state.scorePlayer,
+        cardCount: this.state.cardCount + 1
+      })
+
     }
   }
 
@@ -400,7 +433,9 @@ class App extends React.Component {
                       children="Dealer"
                       nameScore="score-div-left"
                     />
-                    <Cards cards={this.state.bankCards} />
+                    <Cards cards={this.state.bankCards}
+                      hiddenCard={require("./assets/images/back.png")}
+                      styleCard={this.state.displayBack} />
                     <Score
                       score={this.state.scoreBank}
                       scoreType="current-score"
@@ -420,7 +455,8 @@ class App extends React.Component {
                       children="Joueur"
                       nameScore="score-div-left"
                     />
-                    <Cards cards={this.state.playerCard} />
+                    <Cards cards={this.state.playerCard}
+                      styleCard="none" />
                     <Score
                       score={this.state.scorePlayer}
                       scoreType="current-score"
